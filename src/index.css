@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+    --color-accent: #fa812f;
+    --color-primary: #fef3e2;
+    --color-secondary: #393E46
+}
+
+.label {
+    @apply text-sm font-medium text-secondary mb-1 block;
+}
+
+.input {
+    @apply w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent transition;
+}
+
+.textarea {
+    @apply w-full rounded-xl border border-gray-300 px-4 py-3 text-sm min-h-[110px] resize-none focus:outline-none focus:ring-2 focus:ring-accent transition;
+}
+
+.file-input {
+    @apply text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-accent file:text-white hover:file:opacity-90 transition;
+}
+
+.hint {
+    @apply text-xs text-gray-400 mt-1;
+}
+
+@keyframes slide1 {
+    0% { opacity: 0; transform: translateY(100%); }
+    15% { opacity: 1; transform: translateY(0); }
+    35% { opacity: 1; transform: translateY(0); }
+    45% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 0; }
+}
+
+@keyframes slide2 {
+    0%, 35% { opacity: 0; transform: translateY(100%); }
+    45% { opacity: 1; transform: translateY(0); }
+    65% { opacity: 1; transform: translateY(0); }
+    75% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 0; }
+}
+
+@keyframes slide3 {
+    0%, 65% { opacity: 0; transform: translateY(100%); }
+    75% { opacity: 1; transform: translateY(0); }
+    95% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-100%); }
+}
+
+.animate-slide1 {
+    animation: slide1 6s infinite;
+}
+
+.animate-slide2 {
+    animation: slide2 6s infinite;
+}
+
+.animate-slide3 {
+    animation: slide3 6s infinite;
+}
