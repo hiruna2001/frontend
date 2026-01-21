@@ -76,7 +76,7 @@ export default function UserData() {
                     {open && (
                         <div className="absolute right-0 mt-2 w-48 bg-secondary rounded-xl shadow-lg overflow-hidden z-50">
                             <button
-                                onClick={() => navigate("/account")}
+                                onClick={() => navigate("/settings")}
                                 className="w-full text-left px-4 py-2 hover:bg-accent hover:text-primary transition"
                             >
                                 Account Settings
