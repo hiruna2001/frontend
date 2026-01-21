@@ -27,26 +27,81 @@
 }
 
 @keyframes slide1 {
-    0% { opacity: 0; transform: translateY(100%); }
-    15% { opacity: 1; transform: translateY(0); }
-    35% { opacity: 1; transform: translateY(0); }
-    45% { opacity: 0; transform: translateY(-100%); }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    35% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    45% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes slide2 {
-    0%, 35% { opacity: 0; transform: translateY(100%); }
-    45% { opacity: 1; transform: translateY(0); }
-    65% { opacity: 1; transform: translateY(0); }
-    75% { opacity: 0; transform: translateY(-100%); }
-    100% { opacity: 0; }
+
+    0%,
+    35% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    45% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    75% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes slide3 {
-    0%, 65% { opacity: 0; transform: translateY(100%); }
-    75% { opacity: 1; transform: translateY(0); }
-    95% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-100%); }
+
+    0%,
+    65% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    95% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
 }
 
 .animate-slide1 {
@@ -59,4 +114,28 @@
 
 .animate-slide3 {
     animation: slide3 6s infinite;
+}
+
+.glass-card {
+    @apply backdrop-blur-xl bg-[#fef3e2]/80 rounded-2xl p-8 shadow-xl;
+}
+
+.title {
+    @apply text-2xl font-semibold text-secondary mb-6;
+}
+
+.label {
+    @apply block text-sm text-secondary mb-1;
+}
+
+.input {
+    @apply w-full px-4 py-2 rounded-lg bg-white/90 border border-gray-200 text-secondary focus:outline-none focus:ring-2 focus:ring-accent;
+}
+
+.btn {
+    @apply px-6 py-2 rounded-lg bg-accent text-white font-medium hover:opacity-90 transition;
+}
+
+.upload-btn {
+    @apply px-4 py-2 rounded-lg bg-white/90 text-secondary border border-gray-300 cursor-pointer hover:bg-white;
 }
