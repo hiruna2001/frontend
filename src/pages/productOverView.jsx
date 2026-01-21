@@ -28,17 +28,18 @@ export default function ProductOverView() {
         , [])
 
     return (
-        <div className="w-full h-[calc(100vh-100px)] text-secondary">
+        <div className="w-full  lg:h-[calc(100vh-100px)] text-secondary bg-primary">
             {
                 status == "loading" && <Loader />
             }
             {
-                status == "success" && (<div className="w-full h-full flex ">
-                    <div className="w-[50%]  h-full flex justify-center items-center">
+                status == "success" && (<div className="w-full flex flex-col lg:flex-row  p-10">
+                    <h1 className="text-2xl font-bold text-center lg:hidden">{product.name}</h1>
+                    <div className="lg:w-[50%] w-full   h-full flex justify-center items-center">
                         <ImageSlider images={product.images} />
 
                     </div>
-                    <div className="w-[50%] h-full flex flex-col items-center">
+                    <div className="w-full lg:w-[50%] h-full flex flex-col items-center bg-primary">
                         <h1 className="text-2xl font-bold text-center">{product.name}
                             {
                                 product.alternativeNames.map(
@@ -73,7 +74,7 @@ export default function ProductOverView() {
                                 quantity: 1
                             }
 
-                            ]} className="w-full h-[40px] mt-[5px] text-center rounded-lg border border-accent text-accent hover:bg-accent hover:text-white"
+                            ]} className="w-full h-[40px] mt-[5px] flex justify-center items-center text-center rounded-lg border border-accent text-accent hover:bg-accent hover:text-white"
                             onClick={()=>{
                                 console.log(loadCart())
                             }}>Buy Now</Link>

@@ -1,58 +1,41 @@
-import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function RegisterPage() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
     const navigate = useNavigate();
-    const googleLogin = useGoogleLogin({
-        onSuccess:(response)=>{
-            axios.post(import.meta.env.VITE_API_URL+"/api/users/google-login",{
-                token :response.access_token
-            }
-            ).then(response=>{
-                localStorage.setItem("token", response.data.token);
-                const user = response.data.user;
-                if(user.role === "admin"){
-                    navigate("/admin");
-                }else{
-                    navigate("/home");
-                }
-            }).catch(error=>{
-                toast.error("Google login failed");
-            })
-        }
-    });
 
-    async function login() {
+    async function register() {
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            return
+        }
         try {
             const response = await axios.post(
-                import.meta.env.VITE_API_URL + "/api/users/login",
-                { email, password }
+                import.meta.env.VITE_API_URL + "/api/users",
+                {
+                    email, password, firstName, lastName
+                }
             );
-            toast.success("Login successful");
-            localStorage.setItem("token", response.data.token);
+            toast.success("Registration successful");
 
+            navigate("/login");
 
-            const user = response.data.user;
-
-            if (user.role === "admin") {
-                navigate("/admin");
-            } else {
-                navigate("/home");
-            }
 
         } catch (error) {
 
             toast.error("Invalid email or password");
         }
     }
-
 
     return (
         <div className="w-full h-screen bg-[url('/bg.jpg')] bg-cover bg-center flex">
@@ -84,16 +67,34 @@ export default function LoginPage() {
                     </div>
 
                     <h2 className="text-center text-2xl font-semibold text-[var(--color-secondary)]">
-                        Welcome Back
+                        Welcome New User
                     </h2>
 
                     <input
                         type="email"
                         placeholder="Email Address"
+                        autoComplete="email"
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full h-11 px-4 rounded-xl bg-white/80
                         outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
                     />
+                    <input
+                        type="text"
+                        placeholder="First Name"
+                        autoComplete="given-name"
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="w-full h-11 px-4 rounded-xl bg-white/80
+                        outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                    />
+                    <input
+                        type="text"
+                        placeholder="Last Name"
+                        autoComplete="family-name"
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="w-full h-11 px-4 rounded-xl bg-white/80
+                        outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                    />
+
 
                     <div className="relative">
                         <input
@@ -111,33 +112,36 @@ export default function LoginPage() {
                             {showPassword ? "HIDE" : "SHOW"}
                         </button>
                     </div>
-                    <p className="text-right text-sm">
-                        <Link to="/forget-password" className="text-[var(--color-accent)] font-medium">
-                            Forgot Password?
-                        </Link>
-                    </p>
+                    <div className="relative">
+                        <input
+                            type={showPasswordConfirm ? "text" : "password"}
+                            placeholder="Confirm Password"
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="w-full h-11 px-4 pr-12 rounded-xl bg-white/80
+                            outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"
+                        >
+                            {showPasswordConfirm ? "HIDE" : "SHOW"}
+                        </button>
+                    </div>
+
 
                     <button
-                        onClick={login}
+                        onClick={register}
                         className="w-full h-11 rounded-xl bg-[var(--color-accent)]
                         text-white font-medium hover:brightness-110"
                     >
-                        Login
+                        Sign Up
                     </button>
-                    <button
-                        onClick={googleLogin}
-                        className="w-full h-11 rounded-xl bg-[var(--color-accent)]
-                        text-white font-medium hover:brightness-110"
-                    >
-                        Google Login
-                    </button>
-
-
 
                     <p className="text-center text-sm">
-                        New here?{" "}
-                        <Link to="/register" className="text-[var(--color-accent)] font-medium">
-                            Create an account
+                        Already Have An Account?{" "}
+                        <Link to="/login" className="text-[var(--color-accent)] font-medium">
+                            Log In
                         </Link>
                     </p>
 

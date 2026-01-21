@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { PiPlus } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader } from "../../components/loader";
 
